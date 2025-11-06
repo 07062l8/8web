@@ -615,3 +615,15 @@ h3 {
   border: none !important; 
   box-shadow: none !important;
 }
+
+.nav_links {
+  color: rgb(255, 248, 240);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  z-index: 10000;
+}
+
+.nav_links:hover {
+  color: #D1495B;
+}
