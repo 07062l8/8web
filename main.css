@@ -616,7 +616,7 @@ h3 {
   box-shadow: none !important;
 }
 
-.nav_links {
+.nav-link {
   color: rgb(255, 248, 240);
   font-weight: 500;
   text-decoration: none;
@@ -624,6 +624,6 @@ h3 {
   z-index: 10000;
 }
 
-.nav_links:hover {
+.nav-link:hover {
   color: #D1495B;
 }
