@@ -161,22 +161,6 @@ $(document).ready(function() {
 });
 
 $(document).ready(function(){
-  $(".copy-btn").on("click", function(){
-    let textToCopy = $(this).data("copy");
-    let button = $(this);
-
-    navigator.clipboard.writeText(textToCopy).then(function(){
-      button.text("✅");
-      button.attr("title", "Copied to clipboard!").tooltip({trigger:"manual"}).tooltip("show");
-      setTimeout(function(){
-        button.text("📋");
-        button.tooltip("hide").attr("title", "Copy");
-      }, 1500);
-    });
-  });
-});
-
-$(document).ready(function(){
   function lazyLoad() {
     $(".lazy").each(function(){
       let img = $(this);
