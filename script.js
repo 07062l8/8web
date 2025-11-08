@@ -84,6 +84,28 @@ $(document).ready(function () {
             return;
         }
 
+        const $name = $('#name');
+        const $email = $('#email');
+        const $phone = $('#phone');
+        const $projectType = $('#project-type');
+        const $area = $('#area');
+        const $budget = $('#budget');
+        const $deadline = $('#deadline');
+        const $message = $('#message');
+
+        const requestData = {
+            name: $name.val().trim(),
+            email: $email.val().trim(),
+            phone: $phone.val().trim(),
+            projectType: $projectType.val(),
+            area: $area.val().trim(),
+            budget: $budget.val().trim(),
+            deadline: $deadline.val().trim(),
+            message: $message.val().trim()
+        };
+
+        localStorage.setItem("lastEstimate", JSON.stringify(requestData));
+
         $submitBtn.prop('disabled', true).addClass('disabled');
         $submitBtnText.addClass('d-none');
         $submitBtnSpinner.removeClass('d-none');
@@ -96,10 +118,10 @@ $(document).ready(function () {
             $('#successModal').modal('show');
 
             const successSound = document.getElementById('successSound');
-        if (successSound) {
-            successSound.currentTime = 0;
-            successSound.play();
-        }
+            if (successSound) {
+                successSound.currentTime = 0;
+                successSound.play();
+            }
 
             $form[0].reset();
             resetValidation();
@@ -107,11 +129,37 @@ $(document).ready(function () {
 
     });
 
-    // Reset button
     $('#resetBtn').on('click', function () {
         $form[0].reset();
         resetValidation();
     });
+
+    const saved = localStorage.getItem("lastEstimate");
+    if (saved) {
+        const data = JSON.parse(saved);
+        $("#lastRequest")
+            .removeClass("d-none")
+            .html(`
+      <div class="container">
+      <h2 class="section-title">Last request</h2>
+      <h5>Hello, ${data.name}!</h5>
+      <div class="estimate-card p-4 col-12">
+      <p><strong>Your project details:</strong></p>
+      <ul>
+        <li>Email: ${data.email}</li>
+        <li>Phone: ${data.phone || 'N/A'}</li>
+        <li>Project type: ${data.projectType}</li>
+        <li>Area: ${data.area} m²</li>
+        <li>Budget: ${data.budget}</li>
+        <li>Deadline: ${data.deadline}</li>
+        <li>Message: ${data.message}</li>
+      </ul>
+    </div>
+    <h5 style="margin-top:1rem;">Please wait for our response.<h5>
+    </div>
+    `);
+    }
+
 });
 
 
@@ -139,5 +187,21 @@ $(document).ready(function () {
     $(window).on('scroll', updateScrollProgress);
 
     updateScrollProgress();
+});
+
+$(document).ready(function () {
+    $(".copy-btn").on("click", function () {
+        let textToCopy = $(this).data("copy");
+        let button = $(this);
+
+        navigator.clipboard.writeText(textToCopy).then(function () {
+            button.text("✅");
+            button.attr("title", "Copied to clipboard!").tooltip({ trigger: "manual" }).tooltip("show");
+            setTimeout(function () {
+                button.text("📋");
+                button.tooltip("hide").attr("title", "Copy");
+            }, 1500);
+        });
+    });
 });
 
