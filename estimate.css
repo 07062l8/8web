@@ -148,3 +148,100 @@
     font-size: 18px;
   }
 }
+
+.dark-mode input.form-control {
+  background-color: #233247; 
+  border-color: #003D5B;    
+  color: #fffefe;             
+}
+
+textarea.form-control {
+  background-color: #233247;
+  border-color: #003D5B;
+}
+
+.dark-mode .form-control,
+.dark-mode .form-control,
+.dark-mode .form-select {
+  background-color: #233247; 
+  border-color: #003D5B;   
+  color: #fffefe;
+}
+
+.dark-mode #message::placeholder {
+  color: #838383; 
+}
+
+.dark-mode .form-control.is-valid,
+.dark-mode .form-control.is-invalid,
+.dark-mode .form-select.is-valid,
+.dark-mode .form-select.is-invalid {
+  background-color: #233247 !important;
+  border-color: #003D5B !important;
+  color: #fffefe !important;
+}
+
+.dark-mode textarea.form-control.is-valid,
+.dark-mode textarea.form-control.is-invalid {
+  background-color: #233247 !important;
+  border-color: #003D5B !important;
+  color: #fffefe !important;
+}
+/* Chrome, Safari, Edge */
+.dark-mode input.form-control:-webkit-autofill,
+.dark-mode textarea.form-control:-webkit-autofill,
+.dark-mode select.form-select:-webkit-autofill {
+  background-color: #233247 !important;
+  border-color: #003D5B !important;
+  color: #fffefe !important;
+
+  -webkit-box-shadow: 0 0 0px 1000px #233247 inset !important;
+  -webkit-text-fill-color: #fffefe !important;
+}
+
+.estimate-page .last-request {
+  transition: background-color .3s ease, color .3s ease;
+}
+
+.estimate-page .last-request h5 {
+  margin-bottom: 1rem;
+}
+
+.estimate-page .last-request ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+
+.estimate-page .last-request li {
+  margin-bottom: .3rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.estimate-page .last-request li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #fff06e !important;;
+}
+
+.estimate-page .last-request {
+  background-color: var(--cream);
+  color: #333;
+}
+
+.dark-mode .last-request {
+  background-color: #0D1117 !important;
+  color: #fffefe;
+}
+
+.dark-mode .last-request h5 {
+  color: #fffefe;
+}
+
+.dark-mode .last-request .status {
+  color: var(--accent-red);
+}
+
+
