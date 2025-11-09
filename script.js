@@ -147,12 +147,12 @@ $(document).ready(function () {
       <p><strong>Your project details:</strong></p>
       <ul>
         <li>Email: ${data.email}</li>
-        <li>Phone: ${data.phone || 'N/A'}</li>
+        <li>Phone: ${data.phone || '-'}</li>
         <li>Project type: ${data.projectType}</li>
-        <li>Area: ${data.area} m²</li>
-        <li>Budget: ${data.budget}</li>
-        <li>Deadline: ${data.deadline}</li>
-        <li>Message: ${data.message}</li>
+        <li>Area(m²): ${data.area || '-'}</li>
+        <li>Budget: ${data.budget || '-'}</li>
+        <li>Deadline: ${data.deadline || '-'}</li>
+        <li>Message: ${data.message || '-'}</li>
       </ul>
     </div>
     <h5 style="margin-top:1rem;">Please wait for our response.<h5>
