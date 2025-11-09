@@ -127,6 +127,7 @@ $(document).ready(function () {
             resetValidation();
         }, 1500);
 
+        showLastRequest()
     });
 
     $('#resetBtn').on('click', function () {
@@ -134,13 +135,15 @@ $(document).ready(function () {
         resetValidation();
     });
 
-    const saved = localStorage.getItem("lastEstimate");
-    if (saved) {
-        const data = JSON.parse(saved);
-        $("#lastRequest")
-            .removeClass("d-none")
-            .html(`
-      <div class="container">
+    
+    function showLastRequest() {
+        const saved = localStorage.getItem("lastEstimate");
+        if (saved) {
+            const data = JSON.parse(saved);
+            $("#lastRequest")
+                .removeClass("d-none")
+                .html(`
+        <div class="container">
       <h2 class="section-title">Last request</h2>
       <h5>Hello, ${data.name}!</h5>
       <div class="estimate-card p-4 col-12">
@@ -157,8 +160,10 @@ $(document).ready(function () {
     </div>
     <h5 style="margin-top:1rem;">Please wait for our response.<h5>
     </div>
-    `);
+      `);
+        }
     }
+
 
 });
 
