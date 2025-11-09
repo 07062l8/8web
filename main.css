@@ -488,7 +488,7 @@ aside .p-3.mb-4.rounded {
 }
 
 
-.dark-mode #services .card button {
+.dark-mode #services .btn{
     background-color: #F07178 !important; 
     border-color: #F07178 !important;   
     color: #E6EDF3 !important;       
