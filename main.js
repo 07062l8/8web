@@ -405,10 +405,10 @@ $('.copy-btn').on('click', function() {
           <div class="card h-100 shadow-sm">
             <img src="${photo.urls.small}" 
                  class="card-img-top" 
-                 alt="${photo.alt_description || 'Design inspiration'}"
+                 alt="${photo.alt_description || 'New design'}"
                  style="height: 200px; object-fit: cover;">
             <div class="card-body">
-              <p class="card-text">${photo.description || 'Design inspiration'}</p>
+              <p class="card-text">${photo.description || 'New design'}</p>
             </div>
           </div>
         </div>
