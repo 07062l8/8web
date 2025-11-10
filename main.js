@@ -8,57 +8,57 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactForm = modalContent ? modalContent.querySelector('form') : null;
 
 
-// MODAL SUBMIT WITH SUCCESS SOUND
-if (contactForm && modalContent && contactModal) {
-    contactForm.addEventListener('submit', (event) => {
-        event.preventDefault();
+    // MODAL SUBMIT WITH SUCCESS SOUND
+    if (contactForm && modalContent && contactModal) {
+        contactForm.addEventListener('submit', (event) => {
+            event.preventDefault();
 
-        contactForm.style.display = 'none';
+            contactForm.style.display = 'none';
 
-        const thankYouMessage = document.createElement('div');
-        thankYouMessage.id = 'thank-you-message';
-        thankYouMessage.innerHTML = `
+            const thankYouMessage = document.createElement('div');
+            thankYouMessage.id = 'thank-you-message';
+            thankYouMessage.innerHTML = `
             <h2 style="text-align: center; color: #0D1117;">Thank you, Client!</h2>
             <p style="text-align: center; color: #0D1117;">Your request has been successfully submitted.</p>
         `;
-        modalContent.appendChild(thankYouMessage);
+            modalContent.appendChild(thankYouMessage);
 
-        // play success sound
-        const successSound = document.getElementById('success-sound');
-        if (successSound) successSound.play();
+            // play success sound
+            const successSound = document.getElementById('success-sound');
+            if (successSound) successSound.play();
 
-        setTimeout(() => {
+            setTimeout(() => {
+                contactModal.style.display = 'none';
+                contactForm.reset();
+                thankYouMessage.remove();
+                contactForm.style.display = 'block';
+            }, 3000);
+        });
+    }
+
+
+    // MODAL CLOSE ON ESC KEY
+    window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && contactModal.style.display === 'block') {
             contactModal.style.display = 'none';
-            contactForm.reset();
-            thankYouMessage.remove();
-            contactForm.style.display = 'block';
-        }, 3000);
+        }
     });
-}
 
+    // NAVBAR KEYBOARD NAVIGATION
+    const navLinks = document.querySelectorAll('#navbarNavContent .nav-link');
+    let focusedIndex = -1;
 
-// MODAL CLOSE ON ESC KEY
-window.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && contactModal.style.display === 'block') {
-        contactModal.style.display = 'none';
-    }
-});
+    window.addEventListener('keydown', (event) => {
+        if (navLinks.length === 0) return;
 
-// NAVBAR KEYBOARD NAVIGATION
-const navLinks = document.querySelectorAll('#navbarNavContent .nav-link');
-let focusedIndex = -1;
-
-window.addEventListener('keydown', (event) => {
-    if (navLinks.length === 0) return;
-
-    if (event.key === 'ArrowRight') {
-        focusedIndex = (focusedIndex + 1) % navLinks.length;
-        navLinks[focusedIndex].focus();
-    } else if (event.key === 'ArrowLeft') {
-        focusedIndex = (focusedIndex - 1 + navLinks.length) % navLinks.length;
-        navLinks[focusedIndex].focus();
-    }
-});
+        if (event.key === 'ArrowRight') {
+            focusedIndex = (focusedIndex + 1) % navLinks.length;
+            navLinks[focusedIndex].focus();
+        } else if (event.key === 'ArrowLeft') {
+            focusedIndex = (focusedIndex - 1 + navLinks.length) % navLinks.length;
+            navLinks[focusedIndex].focus();
+        }
+    });
 
 
     function isModalOpen() {
@@ -88,12 +88,17 @@ window.addEventListener('keydown', (event) => {
     window.addEventListener('click', (e) => { if (e.target === contactModal) hideModal(); });
     window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isModalOpen()) hideModal(); });
 
-
-
     // RATING STARS
     const stars = document.querySelectorAll('#star-rating .fa-star');
     const ratingDisplay = document.getElementById('rating-display');
     let currentRating = 0;
+
+    const savedRating = localStorage.getItem("userRating");
+    if (savedRating) {
+        currentRating = parseInt(savedRating);
+        updateStars(currentRating);
+        ratingDisplay.textContent = `Your previous rating: ${currentRating}/5.`;
+    }
 
     function updateStars(activeValue, isHover = false) {
         stars.forEach(star => {
@@ -109,9 +114,13 @@ window.addEventListener('keydown', (event) => {
             currentRating = parseInt(star.dataset.value);
             updateStars(currentRating);
             ratingDisplay.textContent = `Thank you! You rated us on: ${currentRating}/5.`;
+
+            localStorage.setItem("userRating", currentRating);
+
             const clickSound = document.getElementById('click-sound');
             if (clickSound) clickSound.play();
         });
+
         star.addEventListener('mouseover', () => updateStars(parseInt(star.dataset.value), true));
         star.addEventListener('mouseout', () => updateStars(currentRating));
     });
@@ -149,7 +158,7 @@ window.addEventListener('keydown', (event) => {
         dateTimeElement.textContent = defaultTimeText;
     }
 
- 
+
     var projectData = [
         { id: 1, name: "Luxury Apartment", category: "Interiors", imgSrc: "img/filter1.jpeg" },
         { id: 2, name: "Modern Villa", category: "Architecture", imgSrc: "img/filter2.jpeg" },
@@ -189,7 +198,7 @@ window.addEventListener('keydown', (event) => {
     renderProjects(projectData);
 
 
-    
+
     // FILTER BUTTONS
     const filterButtons = document.querySelectorAll('#project-filters .btn-outline-dark');
     filterButtons.forEach(button => {
@@ -274,133 +283,133 @@ window.addEventListener('keydown', (event) => {
     }
 
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
 
-    // SCROLL PROGRESS BAR 
-    const $progressBar = $('<div id="scroll-progress"></div>').css({
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '0%',
-        height: '6px',
-        background: 'linear-gradient(90deg, #30638E, #D1495B)',
-        zIndex: 9999,
-        transition: 'width 0.25s ease-out'
-    }).appendTo('body');
+        // SCROLL PROGRESS BAR 
+        const $progressBar = $('<div id="scroll-progress"></div>').css({
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '0%',
+            height: '6px',
+            background: 'linear-gradient(90deg, #30638E, #D1495B)',
+            zIndex: 9999,
+            transition: 'width 0.25s ease-out'
+        }).appendTo('body');
 
-    $(window).on('scroll', function() {
-        const scrollTop = $(this).scrollTop();
-        const docHeight = $(document).height() - $(window).height();
-        const scrolled = (scrollTop / docHeight) * 100;
-        $progressBar.css('width', scrolled + '%');
-    });
-
-
-    // ANIMATED NUMBER COUNTER 
-    function animateCounter($el) {
-        const target = parseInt($el.data('count'));
-        $({ count: 0 }).animate({ count: target }, {
-            duration: 2000,
-            easing: 'swing',
-            step: function(now) {
-                $el.text(Math.floor(now));
-            },
-            complete: function() {
-                $el.text(target);
-            }
+        $(window).on('scroll', function () {
+            const scrollTop = $(this).scrollTop();
+            const docHeight = $(document).height() - $(window).height();
+            const scrolled = (scrollTop / docHeight) * 100;
+            $progressBar.css('width', scrolled + '%');
         });
-    }
-
-    function handleCounters() {
-        $('#stats-section [data-count]').each(function() {
-            const $counter = $(this);
-            if (!$counter.hasClass('counted') && isInViewport($counter)) {
-                $counter.addClass('counted');
-                animateCounter($counter);
-            }
-        });
-    }
-
-    function isInViewport($el) {
-        const rect = $el[0].getBoundingClientRect();
-        return rect.top < $(window).height() && rect.bottom >= 0;
-    }
-
-    $(window).on('scroll', handleCounters);
-    handleCounters(); // initial check
-
-});
 
 
-// NOTIFICATION SYSTEM
-function showNotification(message, duration = 3000) {
-    const $toast = $('<div class="custom-toast"></div>').text(message).css({
-        position: 'fixed',
-        bottom: '20px',
-        right: '20px',
-        background: '#D1495B',
-        color: '#fff',
-        padding: '10px 20px',
-        borderRadius: '5px',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
-        zIndex: 10000,
-        display: 'none'
-    }).appendTo('body');
-
-    $toast.fadeIn(400).delay(duration).fadeOut(400, function() {
-        $(this).remove();
-    });
-}
-
-
-
-// COPY TO CLIPBOARD BUTTON
-$('.copy-btn').on('click', function() {
-    const $btn = $(this);
-    const targetSelector = $btn.data('clipboard-target');
-    const $target = $(targetSelector);
-
-    if ($target.length === 0) return;
-
-    const textToCopy = $target.text().trim();            
-
-    navigator.clipboard.writeText(textToCopy).then(() => {
-        const $icon = $btn.find('i');
-        const originalIcon = $icon.attr('class');
-        $icon.attr('class', 'fas fa-check');
-
-        $btn.prop('title', 'Copied to clipboard!');
-
- 
-        if ($.fn.tooltip) {
-            $btn.tooltip({ trigger: 'manual' }).tooltip('show');
+        // ANIMATED NUMBER COUNTER 
+        function animateCounter($el) {
+            const target = parseInt($el.data('count'));
+            $({ count: 0 }).animate({ count: target }, {
+                duration: 2000,
+                easing: 'swing',
+                step: function (now) {
+                    $el.text(Math.floor(now));
+                },
+                complete: function () {
+                    $el.text(target);
+                }
+            });
         }
 
+        function handleCounters() {
+            $('#stats-section [data-count]').each(function () {
+                const $counter = $(this);
+                if (!$counter.hasClass('counted') && isInViewport($counter)) {
+                    $counter.addClass('counted');
+                    animateCounter($counter);
+                }
+            });
+        }
 
-        setTimeout(() => {
-            $icon.attr('class', originalIcon);
-   
-            if ($.fn.tooltip) {
-                $btn.tooltip('hide');
-            }
-        }, 1500);
-    }).catch(err => {
-        console.error('Failed to copy text: ', err);
+        function isInViewport($el) {
+            const rect = $el[0].getBoundingClientRect();
+            return rect.top < $(window).height() && rect.bottom >= 0;
+        }
+
+        $(window).on('scroll', handleCounters);
+        handleCounters(); // initial check
+
     });
-});
+
+
+    // NOTIFICATION SYSTEM
+    function showNotification(message, duration = 3000) {
+        const $toast = $('<div class="custom-toast"></div>').text(message).css({
+            position: 'fixed',
+            bottom: '20px',
+            right: '20px',
+            background: '#D1495B',
+            color: '#fff',
+            padding: '10px 20px',
+            borderRadius: '5px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+            zIndex: 10000,
+            display: 'none'
+        }).appendTo('body');
+
+        $toast.fadeIn(400).delay(duration).fadeOut(400, function () {
+            $(this).remove();
+        });
+    }
+
+
+
+    // COPY TO CLIPBOARD BUTTON
+    $('.copy-btn').on('click', function () {
+        const $btn = $(this);
+        const targetSelector = $btn.data('clipboard-target');
+        const $target = $(targetSelector);
+
+        if ($target.length === 0) return;
+
+        const textToCopy = $target.text().trim();
+
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            const $icon = $btn.find('i');
+            const originalIcon = $icon.attr('class');
+            $icon.attr('class', 'fas fa-check');
+
+            $btn.prop('title', 'Copied to clipboard!');
+
+
+            if ($.fn.tooltip) {
+                $btn.tooltip({ trigger: 'manual' }).tooltip('show');
+            }
+
+
+            setTimeout(() => {
+                $icon.attr('class', originalIcon);
+
+                if ($.fn.tooltip) {
+                    $btn.tooltip('hide');
+                }
+            }, 1500);
+        }).catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
+    });
 
     $.ajax({
-  url: "https://api.unsplash.com/photos/random",
-  data: {
-    query: "interior design",
-    client_id: "oiU9Hkyd3nzrbIktng762xwOmVGJxHixYbbS6mZz6gQ",
-    count: 3
-  },
-  success: function(data) {
-    let html = "";
-    data.forEach(photo => {
-      html += `
+        url: "https://api.unsplash.com/photos/random",
+        data: {
+            query: "interior design",
+            client_id: "oiU9Hkyd3nzrbIktng762xwOmVGJxHixYbbS6mZz6gQ",
+            count: 3
+        },
+        success: function (data) {
+            let html = "";
+            data.forEach(photo => {
+                html += `
         <div class="col-md-4">
           <div class="card h-100 shadow-sm">
             <img src="${photo.urls.small}" 
@@ -413,13 +422,13 @@ $('.copy-btn').on('click', function() {
           </div>
         </div>
       `;
+            });
+            $("#inspiration-gallery").html(html);
+        },
+        error: function () {
+            $("#inspiration-gallery").html("<p class='text-danger'>Unable to load inspiration images.</p>");
+        }
     });
-    $("#inspiration-gallery").html(html);
-  },
-  error: function() {
-    $("#inspiration-gallery").html("<p class='text-danger'>Unable to load inspiration images.</p>");
-  }
-});
 
 
 });
