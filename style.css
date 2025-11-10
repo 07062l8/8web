@@ -409,3 +409,63 @@ aside a:hover {
     font-weight: 300;
     margin-top: 5px;
 }
+
+.dark-mode input.form-control {
+  background-color: #233247; 
+  border-color: #003D5B;    
+  color: #fffefe;             
+}
+
+textarea.form-control {
+  background-color: #233247;
+  border-color: #003D5B;
+}
+
+.dark-mode .form-control,
+.dark-mode .form-control,
+.dark-mode .form-select {
+  background-color: #233247; 
+  border-color: #003D5B;   
+  color: #fffefe;
+}
+
+/* Chrome, Safari, Edge */
+.dark-mode input.form-control:-webkit-autofill,
+.dark-mode textarea.form-control:-webkit-autofill,
+.dark-mode select.form-select:-webkit-autofill {
+  background-color: #233247 !important;
+  border-color: #003D5B !important;
+  color: #fffefe !important;
+
+  -webkit-box-shadow: 0 0 0px 1000px #233247 inset !important;
+  -webkit-text-fill-color: #fffefe !important;
+}
+
+
+.dark-mode .form-control::placeholder {
+  color: #838383; 
+}
+
+.dark-mode #teamSuggestions {
+  background-color: #2a2d31 !important;
+  border: 1px solid #3a3d42 !important;
+}
+
+
+.dark-mode #teamSuggestions .list-group-item {
+  background-color: #2a2d31 !important;
+  color: #e6eef2 !important;
+  border-color: #3a3d42 !important;
+}
+
+
+.dark-mode #teamSuggestions .list-group-item:hover {
+  background-color: #35383d !important;
+  color: #fff !important;
+}
+
+
+.dark-mode #teamSuggestions mark {
+  background-color: #d1495b !important;
+  color: #fff !important;
+}
