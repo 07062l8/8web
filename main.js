@@ -390,4 +390,36 @@ $('.copy-btn').on('click', function() {
     });
 });
 
+    $.ajax({
+  url: "https://api.unsplash.com/photos/random",
+  data: {
+    query: "interior design",
+    client_id: "oiU9Hkyd3nzrbIktng762xwOmVGJxHixYbbS6mZz6gQ",
+    count: 3
+  },
+  success: function(data) {
+    let html = "";
+    data.forEach(photo => {
+      html += `
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <img src="${photo.urls.small}" 
+                 class="card-img-top" 
+                 alt="${photo.alt_description || 'Design inspiration'}"
+                 style="height: 200px; object-fit: cover;">
+            <div class="card-body">
+              <p class="card-text">${photo.description || 'Design inspiration'}</p>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+    $("#inspiration-gallery").html(html);
+  },
+  error: function() {
+    $("#inspiration-gallery").html("<p class='text-danger'>Unable to load inspiration images.</p>");
+  }
+});
+
+
 });
