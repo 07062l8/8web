@@ -810,3 +810,28 @@ body.dark-theme #stats-section {
     font-size: 2.2rem;
   }
 }
+
+
+.dark-mode #autocomplete-suggestions {
+  background-color: #2a2d31 !important;
+  border: 1px solid #3a3d42 !important;
+}
+
+
+.dark-mode #autocomplete-suggestions .list-group-item {
+  background-color: #2a2d31 !important;
+  color: #e6eef2 !important;
+  border-color: #3a3d42 !important;
+}
+
+
+.dark-mode #autocomplete-suggestions .list-group-item:hover {
+  background-color: #35383d !important;
+  color: #fff !important;
+}
+
+
+.dark-mode #autocomplete-suggestions mark {
+  background-color: #d1495b !important;
+  color: #fff !important;
+}
